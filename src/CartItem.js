@@ -12,14 +12,35 @@ class CartItem extends React.Component {
     // this.increaseQuantity = this.increaseQuantity.bind(this);
   }
 
+  // Note setState FUNC is inherited from the Component class 
+  //in React and we can use in our component
+  
+
   increaseQuantity = () => {
-    console.log("this", this.state);
+    //console.log("this", this.state);
     // why is this coming to be undefined because in OnClick ={this.increaseQuantity}
     //we are passing reference of  increaseQuantity function
     // and value of this depends on how func is being called
 
     //internally react is calling this increaeQuantity func that is
     //value of this is lost
+
+   //setState form 1
+
+  //  this.setState({
+  //    qty: this.state.qty + 1
+  //  });
+
+   // setState form 2
+
+   this.setState( (prevState) => 
+   {
+      return {
+        qty: prevState.qty + 1;
+      } 
+   });
+
+
   };
   render() {
     const { price, title, qty } = this.state;
