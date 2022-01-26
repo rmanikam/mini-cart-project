@@ -10,11 +10,35 @@ class CartItem extends React.Component {
       img: "",
     };
     // this.increaseQuantity = this.increaseQuantity.bind(this);
+    //this.testing();
   }
 
-  // Note setState FUNC is inherited from the Component class 
+  // testing() {
+  //   const promise = new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       resolve("done");
+  //     }, 5000);
+  //   });
+
+  //   promise.then(() => {
+  //     // In promise setState acts like a synchronous call
+  //     //this.setState({ qty: 100 });
+
+  //     this.setState({ qty: this.state.qty + 10 });
+  //     this.setState({ qty: this.state.qty + 10 });
+  //     this.setState({ qty: this.state.qty + 10 });
+  //     console.log("state, this.state");
+  //   });
+  // }
+  // Note setState FUNC is inherited from the Component class
   //in React and we can use in our component
-  
+
+  // react performs batching and setStae call is asynchronous
+  // inside of event handlers
+  // if we want to perform an action just after state has
+  // finished updating we can pass an option of callback to our
+  // setState func
+  //
 
   increaseQuantity = () => {
     //console.log("this", this.state);
@@ -25,23 +49,41 @@ class CartItem extends React.Component {
     //internally react is calling this increaeQuantity func that is
     //value of this is lost
 
-   //setState form 1
+    //setState form 1
 
-  //  this.setState({
-  //    qty: this.state.qty + 1
-  //  });
+    //  this.setState({
+    //    qty: this.state.qty + 1
+    //  });
 
-   // setState form 2
+    // this.setState (
+    //   {
+    //     qty: this.state.qty - 1;
+    //   },  () => {});
 
-   this.setState( (prevState) => 
-   {
+    // setState form 2
+    // if prevState is required use this method
+
+    this.setState((prevState) => {
       return {
-        qty: prevState.qty + 1;
-      } 
-   });
-
-
+        qty: prevState.qty + 1,
+      };
+    });
   };
+
+  decreaseQuantity = () => {
+    const { qty } = this.state;
+
+    if (qty === 0) {
+      return;
+    }
+    // we are passing a callback func
+    this.setState((prevState) => {
+      return {
+        qty: prevState.qty - 1,
+      };
+    });
+  };
+
   render() {
     const { price, title, qty } = this.state;
     return (
@@ -74,6 +116,7 @@ class CartItem extends React.Component {
               alt="decrease"
               className="action-icons"
               src="https://cdn-icons-png.flaticon.com/512/992/992683.png"
+              onClick={this.decreaseQuantity}
             />
             <img
               alt="delete"
