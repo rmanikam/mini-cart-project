@@ -1,17 +1,8 @@
 import React from "react";
 
 class CartItem extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      price: 999,
-      title: "Phone",
-      qty: 1,
-      img: "",
-    };
-    // this.increaseQuantity = this.increaseQuantity.bind(this);
-    //this.testing();
-  }
+  // this.increaseQuantity = this.increaseQuantity.bind(this);
+  //this.testing();
 
   // testing() {
   //   const promise = new Promise((resolve, reject) => {
@@ -86,7 +77,10 @@ class CartItem extends React.Component {
   };
 
   render() {
-    const { price, title, qty } = this.state;
+    // Every instance of CartItem will have property called props
+    // and inside that props we will have data  which we are passing as attributes in Cart file
+    console.log("this.props", this.props);
+    const { price, title, qty } = this.props.product;
     return (
       <div className="cart-item">
         <div className="left-block">
