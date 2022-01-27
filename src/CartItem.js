@@ -1,86 +1,13 @@
 import React from "react";
 
 class CartItem extends React.Component {
-  // this.increaseQuantity = this.increaseQuantity.bind(this);
-  //this.testing();
-
-  // testing() {
-  //   const promise = new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       resolve("done");
-  //     }, 5000);
-  //   });
-
-  //   promise.then(() => {
-  //     // In promise setState acts like a synchronous call
-  //     //this.setState({ qty: 100 });
-
-  //     this.setState({ qty: this.state.qty + 10 });
-  //     this.setState({ qty: this.state.qty + 10 });
-  //     this.setState({ qty: this.state.qty + 10 });
-  //     console.log("state, this.state");
-  //   });
-  // }
-  // Note setState FUNC is inherited from the Component class
-  //in React and we can use in our component
-
-  // react performs batching and setStae call is asynchronous
-  // inside of event handlers
-  // if we want to perform an action just after state has
-  // finished updating we can pass an option of callback to our
-  // setState func
-  // outside of event handler react doesnt perform batching
-  // and setState call is synchronous
-
-  increaseQuantity = () => {
-    //console.log("this", this.state);
-    // why is this coming to be undefined because in OnClick ={this.increaseQuantity}
-    //we are passing reference of  increaseQuantity function
-    // and value of this depends on how func is being called
-
-    //internally react is calling this increaeQuantity func that is
-    //value of this is lost
-
-    //setState form 1
-
-    //  this.setState({
-    //    qty: this.state.qty + 1
-    //  });
-
-    // this.setState (
-    //   {
-    //     qty: this.state.qty - 1;
-    //   },  () => {});
-
-    // setState form 2
-    // if prevState is required use this method
-
-    this.setState((prevState) => {
-      return {
-        qty: prevState.qty + 1,
-      };
-    });
-  };
-
-  decreaseQuantity = () => {
-    const { qty } = this.state;
-
-    if (qty === 0) {
-      return;
-    }
-    // we are passing a callback func
-    this.setState((prevState) => {
-      return {
-        qty: prevState.qty - 1,
-      };
-    });
-  };
-
   render() {
     // Every instance of CartItem will have property called props
     // and inside that props we will have data  which we are passing as attributes in Cart file
     console.log("this.props", this.props);
     const { price, title, qty } = this.props.product;
+    const { product, onIncreaseQuantity, onDecreaseQuantity, onDeleteProduct } =
+      this.props;
     return (
       <div className="cart-item">
         <div className="left-block">
@@ -105,18 +32,19 @@ class CartItem extends React.Component {
               alt="increase"
               className="action-icons"
               src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
-              onClick={this.increaseQuantity}
+              onClick={() => onIncreaseQuantity(product)}
             />
             <img
               alt="decrease"
               className="action-icons"
               src="https://cdn-icons-png.flaticon.com/512/992/992683.png"
-              onClick={this.decreaseQuantity}
+              onClick={() => onDecreaseQuantity(product)}
             />
             <img
               alt="delete"
               className="action-icons"
               src="https://cdn-icons.flaticon.com/png/512/484/premium/484662.png?token=exp=1643084124~hmac=1827be36cde0a0c2ac6353feca3f9ea4"
+              onClick={() => onDeleteProduct(product.id)}
             />
           </div>
         </div>
@@ -177,3 +105,80 @@ export default CartItem;
 // write car.getCompany.bind(car)
 
 // now call func
+
+// Note we dont need this code anymore as we are passing state to it
+
+// this.increaseQuantity = this.increaseQuantity.bind(this);
+//this.testing();
+
+// testing() {
+//   const promise = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve("done");
+//     }, 5000);
+//   });
+
+//   promise.then(() => {
+//     // In promise setState acts like a synchronous call
+//     //this.setState({ qty: 100 });
+
+//     this.setState({ qty: this.state.qty + 10 });
+//     this.setState({ qty: this.state.qty + 10 });
+//     this.setState({ qty: this.state.qty + 10 });
+//     console.log("state, this.state");
+//   });
+// }
+// Note setState FUNC is inherited from the Component class
+//in React and we can use in our component
+
+// react performs batching and setStae call is asynchronous
+// inside of event handlers
+// if we want to perform an action just after state has
+// finished updating we can pass an option of callback to our
+// setState func
+// outside of event handler react doesnt perform batching
+// and setState call is synchronous
+
+//console.log("this", this.state);
+// why is this coming to be undefined because in OnClick ={this.increaseQuantity}
+//we are passing reference of  increaseQuantity function
+// and value of this depends on how func is being called
+
+//internally react is calling this increaeQuantity func that is
+//value of this is lost
+
+//setState form 1
+
+//  this.setState({
+//    qty: this.state.qty + 1
+//  });
+
+// this.setState (
+//   {
+//     qty: this.state.qty - 1;
+//   },  () => {});
+
+// setState form 2
+// if prevState is required use this method
+
+// increaseQuantity = () => {
+//   this.setState((prevState) => {
+//     return {
+//       qty: prevState.qty + 1,
+//     };
+//   });
+// };
+
+// decreaseQuantity = () => {
+//   const { qty } = this.state;
+
+//   if (qty === 0) {
+//     return;
+//   }
+//   // we are passing a callback func
+//   this.setState((prevState) => {
+//     return {
+//       qty: prevState.qty - 1,
+//     };
+//   });
+// };
