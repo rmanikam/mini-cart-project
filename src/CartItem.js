@@ -38,7 +38,8 @@ class CartItem extends React.Component {
   // if we want to perform an action just after state has
   // finished updating we can pass an option of callback to our
   // setState func
-  //
+  // outside of event handler react doesnt perform batching
+  // and setState call is synchronous
 
   increaseQuantity = () => {
     //console.log("this", this.state);
