@@ -1,22 +1,21 @@
 import React from "react";
 
-class CartItem extends React.Component {
-  render() {
-    // Every instance of CartItem will have property called props
-    // and inside that props we will have data  which we are passing as attributes in Cart file
-    console.log("this.props", this.props);
-    const { price, title, qty } = this.props.product;
-    const { product, onIncreaseQuantity, onDecreaseQuantity, onDeleteProduct } =
-      this.props;
-    return (
-      <div className="cart-item">
-        <div className="left-block">
-          <img style={styles.image} />
-        </div>
-        <div className="right-block">
-          <div style={{ fontSize: 25 }}>{title}</div>
-          {/* Note Object Destructuring taking place here */}
-          {/* 
+const CartItem = (props) => {
+  // Every instance of CartItem will have property called props
+  // and inside that props we will have data  which we are passing as attributes in Cart file
+
+  const { price, title, qty } = props.product;
+  const { product, onIncreaseQuantity, onDecreaseQuantity, onDeleteProduct } =
+    props;
+  return (
+    <div className="cart-item">
+      <div className="left-block">
+        <img style={styles.image} />
+      </div>
+      <div className="right-block">
+        <div style={{ fontSize: 25 }}>{title}</div>
+        {/* Note Object Destructuring taking place here */}
+        {/* 
           in  { {} }  the inner curly braces can be written as 
           {} = example
           where example = {
@@ -24,34 +23,33 @@ class CartItem extends React.Component {
               platform: "gfg"
           }; */}
 
-          <div style={{ color: "#777" }}>{price}</div>
-          <div style={{ color: "#777" }}>Qty: {qty} </div>
-          <div className="cart-item-actions">
-            {/* Buttons */}
-            <img
-              alt="increase"
-              className="action-icons"
-              src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
-              onClick={() => onIncreaseQuantity(product)}
-            />
-            <img
-              alt="decrease"
-              className="action-icons"
-              src="https://cdn-icons-png.flaticon.com/512/992/992683.png"
-              onClick={() => onDecreaseQuantity(product)}
-            />
-            <img
-              alt="delete"
-              className="action-icons"
-              src="https://cdn-icons.flaticon.com/png/512/484/premium/484662.png?token=exp=1643084124~hmac=1827be36cde0a0c2ac6353feca3f9ea4"
-              onClick={() => onDeleteProduct(product.id)}
-            />
-          </div>
+        <div style={{ color: "#777" }}>{price}</div>
+        <div style={{ color: "#777" }}>Qty: {qty} </div>
+        <div className="cart-item-actions">
+          {/* Buttons */}
+          <img
+            alt="increase"
+            className="action-icons"
+            src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
+            onClick={() => onIncreaseQuantity(product)}
+          />
+          <img
+            alt="decrease"
+            className="action-icons"
+            src="https://cdn-icons-png.flaticon.com/512/992/992683.png"
+            onClick={() => onDecreaseQuantity(product)}
+          />
+          <img
+            alt="delete"
+            className="action-icons"
+            src="https://cdn-icons.flaticon.com/png/512/484/premium/484662.png?token=exp=1643084124~hmac=1827be36cde0a0c2ac6353feca3f9ea4"
+            onClick={() => onDeleteProduct(product.id)}
+          />
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 const styles = {
   image: {
