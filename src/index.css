@@ -20,6 +20,7 @@ body {
 .action-icons {
   height: 25px;
   width: 25px;
+  margin-top: 10px;
   margin-right: 10px;
 }
 
